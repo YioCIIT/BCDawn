@@ -2,16 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player2DPickupBehavior : MonoBehaviour
+public class Player2DEnemyDamageBox : MonoBehaviour
 {
-    [SerializeField]
-    private Player2DPickUpSO pickUpSO;
-    public Player2DPickUpSO PickUpSO {get{return pickUpSO;}}
+    float damageOutput;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        damageOutput = transform.parent.GetComponent<Player2DEnemyBehavior>().DamageOuput;
     }
 
     // Update is called once per frame
@@ -23,8 +21,7 @@ public class Player2DPickupBehavior : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.transform.tag == "Player")
         {
-            Destroy(gameObject, 0.2f);
+            other.transform.GetComponent<PlayerBehavior2D>().UpdateHealth(true, damageOutput);
         }
     }
-
 }

@@ -11,6 +11,11 @@ public class PlayerBehavior2D : MonoBehaviour
     private float currentHealth = 0f;
     public float CurrentHealth { get{ return currentHealth;}}
 
+    [SerializeField]
+    private UIManager uiManager;
+
+    private bool isVulnerable = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,14 +33,26 @@ public class PlayerBehavior2D : MonoBehaviour
     public void UpdateHealth(bool p_isDamage, float p_amount)
     {
         if(p_isDamage)
-        {
-            //ternary operation
-            currentHealth = (currentHealth - p_amount <= 0) ? 0 : currentHealth - p_amount;
+        {   if(isVulnerable)
+            {
+                //ternary operation
+                currentHealth = (currentHealth - p_amount <= 0) ? 0 : currentHealth - p_amount;
+                isVulnerable = false;
+                StartCoroutine(DamagedInvul());
+            }
         }
         else
         {
-            currentHealth = (currentHealth + p_amount >= maxHealth) ? maxHealth : currentHealth + p_amount;
+            currentHealth = (currentHealth + p_amount >= maxHealth) ? maxHealth : currentHealth + p_amount;   
         }
+
+        uiManager.UpdateHealth();
+    }
+
+    private IEnumerator DamagedInvul()
+    {
+        yield return new WaitForSeconds(2.5f);
+        isVulnerable = true;
     }
 
 #endregion

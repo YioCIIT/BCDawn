@@ -6,7 +6,8 @@ public enum pickUpKind
 {
     none = 0,
     hp = 1,
-    speed = 2
+    speed = 2,
+    coin = 3
 }
 
 [CreateAssetMenu(fileName = "Player2DPickUpSO", menuName = "BCDawn/Player2DPickUpSO", order = 0)]

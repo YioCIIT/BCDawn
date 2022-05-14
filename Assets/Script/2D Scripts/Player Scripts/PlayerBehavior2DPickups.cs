@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerBehavior2DPickups : MonoBehaviour
 {
-    [SerializeField]
-    private UIManager uiManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,11 +27,15 @@ public class PlayerBehavior2DPickups : MonoBehaviour
                 case pickUpKind.hp:
                     
                     this.GetComponent<PlayerBehavior2D>().UpdateHealth(false, pickUp.PickUpSO.pickupValue);
-                    uiManager.UpdateHealth();
+
                     break;
 
                 case pickUpKind.speed:
                     
+                    break;
+
+                case pickUpKind.coin: 
+
                     break;
                 case pickUpKind.none:
                     Debug.LogWarning("PICK UP SET TO NONE");
@@ -44,7 +47,6 @@ public class PlayerBehavior2DPickups : MonoBehaviour
     public void TestFunc(float val)
     {
         this.GetComponent<PlayerBehavior2D>().UpdateHealth(true, val);
-        uiManager.UpdateHealth();
     }
 
 }
