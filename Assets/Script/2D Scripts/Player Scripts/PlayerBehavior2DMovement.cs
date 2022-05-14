@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBehavior2D : MonoBehaviour
+public class PlayerBehavior2DMovement : MonoBehaviour
 {
-    public float moveSpeed = 0f;
-    public float jumpForce = 0f;
+    [Header("Locomotion")]
+    [SerializeField]
+    private float moveSpeed = 0f;
+    [SerializeField]
+    private float jumpForce = 0f;
+    
+    //Animation
     private Animator characterAni = null;
     private Rigidbody2D rb = null;
-
     // Start is called before the first frame update
     void Start()
     {
         characterAni = transform.GetComponent<Animator>();
         rb = transform.GetComponent<Rigidbody2D>();
-
     }
 
     // Update is called once per frame
@@ -22,11 +25,12 @@ public class PlayerBehavior2D : MonoBehaviour
     {
         
     }
-    
+        
     private void FixedUpdate() {
         Movement();
     }
 
+#region Movement
     private void Movement()
     {
         float directionX = Input.GetAxis("Horizontal");
@@ -62,4 +66,5 @@ public class PlayerBehavior2D : MonoBehaviour
         }
 
     }
+#endregion
 }
